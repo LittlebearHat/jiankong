@@ -1,0 +1,14 @@
+import { createApp } from "vue";
+import App from "./App.vue";
+import router from "./router";
+import store from "./store";
+import "@/assets/css/global.less";
+import axios from "axios";
+import socket from "@/utils/websocket.js";
+socket.Instance.connect();
+axios.defaults.baseURL = "http://127.0.0.1:8888/api/";
+const app = createApp(App);
+app.config.globalProperties.$socket = socket.Instance;
+app.config.globalProperties.$echarts = window.echarts;
+app.use(store).use(router).mount("#app");
+//console.log(this.$socket.registerCallBack());
